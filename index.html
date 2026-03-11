@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FPC 교육 제안서</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
+
+  <style>
+  /* ----------------------------- */
+  /* 1) 기본 색상 */
+  /* ----------------------------- */
+  :root {
+    --bg: #F1F0E4;
+    --text: #27374D;
+    --muted: #526D82;
+    --card-bg: #FAF8F0;
+    --border: #DDE6ED;
+    --shadow: rgba(0,0,0,0.08);
+    --shadow-strong: rgba(0,0,0,0.12);
+    --link: #2C4A7A;
+    --link-hover: #1A2F55;
+  }
+
+  /* ----------------------------- */
+  /* 2) 전체 레이아웃 */
+  /* ----------------------------- */
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    margin: 0;
+    padding: 0;
+  }
+
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 24px 60px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  }
+
+  /* ----------------------------- */
+  /* 3) 헤더 */
+  /* ----------------------------- */
+  header {
+    text-align: center;
+    margin-bottom: 35px;
+    padding: 0;
+    position: relative;
+  }
+
+  .logo {
+    width: 50px;
+    opacity: 0.9;
+    margin-top: 1rem;
+    margin-bottom: 0;
+    transition: filter 0.3s ease;
+  }
+
+  header h1 {
+    font-size: 2.4rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin: 0;
+  }
+
+  header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40%;
+    height: 2px;
+    background: #D8D5C8;
+    border-radius: 2px;
+    opacity: 0.6;
+  }
+
+  header::after {
+    content: "";
+    display: block;
+    width: 75%;
+    height: 3px;
+    background: #D8D5C8;
+    margin: 18px auto 0;
+    border-radius: 2px;
+    opacity: 0.7;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+    padding: 0;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  /* ----------------------------- */
+  /* 4) 카드 스타일 */
+  /* ----------------------------- */
+  .info-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1rem 1rem 1rem 2.5rem;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 14px var(--shadow);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .info-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px var(--shadow-strong);
+  }
+
+  .info-card h2 {
+    font-size: 1.45rem;
+    margin-bottom: 14px;
+    color: var(--text);
+    font-weight: 700;
+  }
+
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;  
+  }
+
+  .section-icon {
+    width: 28px;
+    height: 28px;
+    vertical-align: bottom;
+  }
+
+  /* 리스트 스타일 */
+  .info-card ul {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 6px;
+  }
+
+  .info-card ul li {
+    margin-bottom: 10px;
+    font-size: 1rem;
+    line-height: 1.3;
+    padding-left: 4px;
+    position: relative;
+  }
+
+  .info-card ul li::before {
+    content: "•";
+    color: var(--text);
+    font-weight: 700;
+    position: absolute;
+    left: -14px;
+    top: 2px;
+  }
+
+  .info-card ul.sub li {
+    padding-left: 20px;
+  }
+
+  .info-card ul.sub li::before {
+    content: "Ο";
+    color: var(--muted);
+    font-size: 0.9rem;
+    position: absolute;
+    left: 0;
+    top: 2px;
+  }
+
+  .highlight a {
+    color: #8C4A4A;
+    font-weight: 700;
+  }
+
+  .small-text {
+    font-size: 0.85rem;
+    opacity: 0.85;
+  }
+
+  /* ----------------------------- */
+  /* 4-1) 카드 이미지 배치 */
+  /* ----------------------------- */
+  .card-image {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    width: 250px;
+    opacity: 0.95;
+    pointer-events: none;
+  }
+
+  /* ----------------------------- */
+  /* 5) 링크 스타일 */
+  /* ----------------------------- */
+  a {
+    color: var(--link);
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: color 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  a::after {
+    content: "↗";
+    font-size: 0.85rem;
+    opacity: 0.7;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  a:hover {
+    color: var(--link-hover);
+    opacity: 0.9;
+    transform: scale(1.03);
+  }
+
+  a:hover::after {
+    transform: translate(2px, -2px);
+    opacity: 1;
+  }
+
+  /* ----------------------------- */
+  /* 6) Footer */
+  /* ----------------------------- */
+  footer {
+    text-align: center;
+    margin-top: 32px;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  /* ----------------------------- */
+  /* 7) Reveal Animation */
+  /* ----------------------------- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ----------------------------- */
+  /* 8) 다크모드 대응 */
+  /* ----------------------------- */
+  @media (prefers-color-scheme: dark) {
+    body {
+      background: #121212;
+      color: #E0E0E0;
+    }
+
+    .page {
+      background: #1E1E1E;
+      box-shadow: none;
+    }
+
+    .info-card {
+      background: #1E1E1E;
+      border: 1px solid #37474F;
+      box-shadow: none;
+    }
+
+    .info-card h2 {
+      color: #ECEFF1;
+    }
+
+    .info-card ul li::before {
+      color: #90A4AE;
+    }
+
+    a {
+      color: #90CAF9;
+    }
+
+    a:hover {
+      color: #E3F2FD;
+    }
+
+    .logo {
+      filter: invert(1) brightness(1.6);
+    }
+
+    footer {
+      color: #90A4AE;
+    }
+  }
+
+  /* ----------------------------- */
+  /* 9) 모바일 대응 */
+  /* ----------------------------- */
+  @media (max-width: 600px) {
+    .page {
+      padding: 28px 16px 40px;
+    }
+
+    .logo {
+      width: 35px;
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+    }
+
+    .info-card {
+      padding: 20px 22px;
+    }
+
+    .info-card h2 {
+      font-size: 1.25rem;
+    }
+
+    .info-card ul li {
+      font-size: 0.95rem;
+    }
+
+    .small-text {
+      font-size: 0.65rem;
+      opacity: 0.85;
+    }
+
+    .card-image {
+      width: 110px;
+      right: 0;
+      bottom: 0;
+    }
+  }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+
+    <header class="header reveal visible">
+      <img src="image/logo.png" class="logo" alt="FPC Logo">
+      <h1>FPC 교육 제안서</h1>
+      <p class="subtitle">사람 중심의 재무설계, 실전 중심의 교육</p>
+    </header>
+
+    <!-- 프로필 & 블로그 안내 -->
+    <section class="info-card reveal visible">
+      <div class="section-title">
+        <img src="image/mh.png" class="section-icon" alt="">
+        <h2>프로필 및 사업안내</h2>
+      </div>
+
+      <ul>
+        <li><strong><h3>프로필</h3></strong>
+          <a href="https://fpc-profile.netlify.app" target="_blank" rel="noopener noreferrer">
+            대표소개 및 사업내용 안내 <span class="small-text">바로가기</span>
+          </a>
+        </li>
+
+        <li><strong><h3>블로그</h3></strong>
+          <a href="https://blog.fpc-wp.com" target="_blank" rel="noopener noreferrer">
+            현장 상담사례, 금융시장, 돈에 대한 이야기 등 기록 <span class="small-text">바로가기</span>
+          </a>
+        </li>
+      </ul>
+
+      <img src="image/cha1.png" class="card-image" alt="인사 캐릭터">
+    </section>
+
+    <!-- 교육 세부내용 -->
+    <section class="info-card reveal visible">
+      <div class="section-title">
+        <img src="image/lec.png" class="section-icon" alt="">
+        <h2>생명보험 교육 안내</h2>
+      </div>
+      
+      <ul>
+        <li>
+          <strong><h3>FPC의 교육 컨셉</h3></strong>
+          <a href="https://insu-jean.netlify.app" target="_blank" rel="noopener noreferrer">
+            FPC의 교육방향을 소개 드립니다. <span class="small-text">바로가기</span>
+          </a>
+        </li><br>
+
+        <li><strong><h3>현재 진행중인 주요 교육</h3></strong>
+          <ul class="sub">
+            <li class="highlight">
+              <a href="https://lt-jean.netlify.app" target="_blank" rel="noopener noreferrer">
+                종신보험 판매력 향상을 위한 교육
+              </a>
+            </li>
+
+            <li class="highlight">
+              <a href="https://tax-jean.netlify.app" target="_blank" rel="noopener noreferrer">
+                보험과 세금<span class="small-text">(고객을 이해시키고 행동할 수 있게 하는 세법 활용법)</span>
+              </a>
+            </li>
+          </ul>
+        </li><br>
+
+        <li>
+          <strong><h3>기타 교육</h3></strong>
+          변액보험, 건강보험, 시리즈 교육 등 현장 니즈 맞춤교육 진행 가능
+        </li>
+      </ul>
+
+      <img src="image/cha2.png" class="card-image" alt="안내 캐릭터">
+    </section>
+
+    <footer class="footer reveal visible">
+      © FPC. All rights reserved 
+      <a href="https://fpc-wp.com" target="_blank" rel="noopener noreferrer">
+        (홈페이지 : https://fpc-wp.com)
+      </a>
+    </footer>
+
+  </div>
+</body>
+</html>
